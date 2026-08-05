@@ -1,0 +1,17 @@
+[
+  {
+    "id": "new-project-intake",
+    "prompt": "我有一个都市异能复仇的点子，想写80万字，请现在开始帮我做立项。",
+    "expected": "先输出简短运行卡；要求项目目录、平台、读者、核心异能及代价、复仇终局等最小输入；路由到 story-positioning 与 project-bootstrap；将未确认内容保持为候选，并在首次写入前设置确认点。"
+  },
+  {
+    "id": "midstory-canon-revision",
+    "prompt": "我的项目已写到第42章，想让主角提前知道反派真实身份并重写40–42章，该怎么推进？",
+    "expected": "先要求项目目录和反派相关 Canon ID；以 revise 诊断和影响追踪开路；列出受影响正文、细纲、伏笔、角色知识边界与迁移方案；在 Canon 改设前停止等待确认。"
+  },
+  {
+    "id": "interrupted-batch-recovery",
+    "prompt": "自动写第22到30章时在第24章审校发现S1问题，中断后怎样恢复？",
+    "expected": "明确 halt，不继续生成后续章节；记录阻断原因和影响章节；修复第24章及相关 Canon/细纲，运行回归检查；只通过 batch_controller 的 next 从正确状态恢复。"
+  }
+]
