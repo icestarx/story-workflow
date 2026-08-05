@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "planning": {
+    "planned_chapters": 1,
+    "planned_volumes": 1,
+    "faction_targets": {"order": 3, "neutral": 2, "antagonistic": 2}
+  },
+  "automation": {
+    "max_contiguous_batch": 100
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "canon_version": "0.1.0",
+  "entities": [],
+  "facts": [
+    {
+      "id": "mystery.red-film",
+      "statement": "红色底片与导师失踪有关。",
+      "status": "confirmed",
+      "source_steps": [46],
+      "visibility": "author-only",
+      "source_file": "01-canon/mysteries.md"
+    }
+  ],
+  "foreshadows": [],
+  "changes": []
+}

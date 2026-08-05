@@ -1,0 +1,4 @@
+interface:
+  display_name: "长篇网文创作团队"
+  short_description: "以Canon、编辑团队与受控自动化持续创作和管理长篇中文网文"
+  default_prompt: "Use $story-workflow to diagnose or initialize a Chinese web-novel project and safely continue its next chapter."
