@@ -9,8 +9,9 @@ import re
 from collections import defaultdict
 from pathlib import Path
 
+from project_paths import chapter_filename, chapter_from_filename
 
-CHAPTER_RE = re.compile(r"chapter-(\d{4})\.md$", re.IGNORECASE)
+
 SENTENCE_RE = re.compile(r"[^。！？!?\n]+[。！？!?]?")
 
 
@@ -28,8 +29,7 @@ def load_patterns(path: Path) -> list[tuple[str, str]]:
 
 
 def chapter_number(path: Path) -> int | None:
-    match = CHAPTER_RE.search(path.name)
-    return int(match.group(1)) if match else None
+    return chapter_from_filename(path.name)
 
 
 def find_line_hits(text: str, term: str) -> list[dict[str, object]]:
@@ -85,11 +85,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Audit all manuscript chapters for deterministic issues and review signals.")
     parser.add_argument("--project-dir", type=Path, required=True)
     parser.add_argument("--expected-chapters", type=int, help="Check coverage from 1 through N.")
-    parser.add_argument("--terms-file", type=Path, help="Default: 00-project/banned-terms.txt")
-    parser.add_argument("--style-patterns", type=Path, help="Default: 00-project/style-patterns.txt")
+    parser.add_argument("--terms-file", type=Path, help="Default: 项目/禁用词.txt")
+    parser.add_argument("--style-patterns", type=Path, help="Default: 项目/风格模式.txt")
     parser.add_argument("--repeat-threshold", type=int, default=5)
     parser.add_argument("--min-nonspace-chars", type=int, default=100, help="Flag chapters shorter than this; default: 100.")
-    parser.add_argument("--output", type=Path, help="Default: 05-reviews/final/technical-audit.md")
+    parser.add_argument("--output", type=Path, help="Default: 审校/最终/技术审计.md")
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
@@ -101,17 +101,17 @@ def main() -> None:
         parser.error("--min-nonspace-chars must be positive")
 
     project = args.project_dir
-    manuscript_dir = project / "04-manuscript"
+    manuscript_dir = project / "正文"
     if not manuscript_dir.is_dir():
         parser.error(f"manuscript directory not found: {manuscript_dir}")
-    term_rules = load_patterns(args.terms_file or project / "00-project/banned-terms.txt")
-    style_rules = load_patterns(args.style_patterns or project / "00-project/style-patterns.txt")
-    paths = sorted(manuscript_dir.glob("chapter-*.md"))
+    term_rules = load_patterns(args.terms_file or project / "项目/禁用词.txt")
+    style_rules = load_patterns(args.style_patterns or project / "项目/风格模式.txt")
+    paths = sorted(manuscript_dir.glob("第*章.md"))
     discovered = {chapter_number(path) for path in paths if chapter_number(path) is not None}
 
     result: dict[str, object] = {
         "chapter_count": len(paths),
-        "missing_chapters": [f"chapter-{number:04d}.md" for number in range(1, (args.expected_chapters or 0) + 1) if number not in discovered],
+        "missing_chapters": [chapter_filename(number) for number in range(1, (args.expected_chapters or 0) + 1) if number not in discovered],
         "technical_issues": [],
         "term_hits": [],
         "pattern_hits": [],
@@ -140,7 +140,7 @@ def main() -> None:
             result["repeated_starts"].append({"chapter": chapter, **repeated})
 
     result["review_count"] = sum(len(result[key]) for key in ("missing_chapters", "technical_issues", "term_hits", "pattern_hits", "duplicate_paragraphs", "repeated_starts"))
-    output = args.output or project / "05-reviews/final/technical-audit.md"
+    output = args.output or project / "审校/最终/技术审计.md"
     if output.exists() and not args.force:
         parser.error(f"output exists: {output}; use --force to replace it")
     output.parent.mkdir(parents=True, exist_ok=True)

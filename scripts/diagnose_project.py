@@ -8,13 +8,15 @@ import json
 from pathlib import Path
 from typing import Any
 
+from project_paths import chapter_filename
+
 
 CORE_FILES = (
-    "00-project/workflow-config.json",
-    "00-project/production-state.json",
-    "01-canon/registry.json",
-    "01-canon/state.md",
-    "02-planning/chapter-index.md",
+    "项目/工作流配置.json",
+    "项目/生产状态.json",
+    "正典/正典索引.json",
+    "正典/故事状态.md",
+    "规划/章节索引.md",
 )
 
 
@@ -66,8 +68,8 @@ def route(intent: str, project: Path, chapter: int | None, active_batch: dict[st
     if active_batch:
         return {"skill": "serial-production", "action": "resume-active-batch", "reason": "检测到可恢复的活动批次", "command": "orchestrate_batch.py next"}
     if intent == "write" and chapter:
-        outline = project / "03-outlines" / f"chapter-{chapter:04d}.md"
-        manuscript = project / "04-manuscript" / f"chapter-{chapter:04d}.md"
+        outline = project / "细纲" / chapter_filename(chapter)
+        manuscript = project / "正文" / chapter_filename(chapter)
         if not outline.is_file():
             return {"skill": "chapter-outline", "action": "create-or-recover-outline", "reason": "目标章缺细纲", "command": "validate_outline.py"}
         if not manuscript.is_file():
@@ -96,17 +98,17 @@ def main() -> None:
 
     project = args.project_dir
     missing = [relative for relative in CORE_FILES if not (project / relative).is_file()] if project.is_dir() else list(CORE_FILES)
-    registry = read_json(project / "01-canon/registry.json") if project.is_dir() else None
-    state = read_json(project / "00-project/production-state.json") if project.is_dir() else None
+    registry = read_json(project / "正典/正典索引.json") if project.is_dir() else None
+    state = read_json(project / "项目/生产状态.json") if project.is_dir() else None
     active_batch = state.get("active_batch") if state else None
     if not isinstance(active_batch, dict):
         active_batch = None
     intent = "continue" if args.intent == "auto" and active_batch else args.intent
     counts = {
-        "volumes": count_files(project, "02-planning/volumes", "volume-*.md") if project.is_dir() else 0,
-        "outlines": count_files(project, "03-outlines", "chapter-*.md") if project.is_dir() else 0,
-        "manuscripts": count_files(project, "04-manuscript", "chapter-*.md") if project.is_dir() else 0,
-        "reviews": count_files(project, "05-reviews", "*.md") if project.is_dir() else 0,
+        "volumes": count_files(project, "规划/分卷", "第*卷.md") if project.is_dir() else 0,
+        "outlines": count_files(project, "细纲", "第*章.md") if project.is_dir() else 0,
+        "manuscripts": count_files(project, "正文", "第*章.md") if project.is_dir() else 0,
+        "reviews": count_files(project, "审校", "*.md") if project.is_dir() else 0,
     }
     recommendation = route(intent, project, args.chapter, active_batch, missing, counts)
     affected = {changed_id: find_references(project, changed_id) for changed_id in args.changed_id} if project.is_dir() else {}

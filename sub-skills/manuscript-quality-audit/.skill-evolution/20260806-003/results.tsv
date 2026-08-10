@@ -1,0 +1,3 @@
+timestamp	round	status	hypothesis	vote	mode
+2026-08-06T06:37:01.116849+00:00	1	restored	将细纲字数预算偏差设为有阈值的最终审计项，会提升交付密度诊断且不削弱其他审计路由。	0-3 better	paired
+2026-08-06T07:27:50.261690+00:00	2	restored	把跨日时间线核对、S1停批和canon-management最小修正写入最终审计，会提升连续性故障恢复且不削弱篇幅与表达审计。	1-2 better	paired

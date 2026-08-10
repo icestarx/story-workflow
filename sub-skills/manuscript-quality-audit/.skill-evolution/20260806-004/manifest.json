@@ -1,0 +1,17 @@
+{
+  "run_id": "20260806-004",
+  "created_at": "2026-08-06T07:37:42.338434+00:00",
+  "target_root": "C:\\Users\\i-lik\\Documents\\小说\\sub-skills\\manuscript-quality-audit",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "6c2042936f51c55af5ee26c3e5c699697c8612e96398fef854d1153bec80bef3"
+    }
+  ],
+  "test_prompts": [
+    {
+      "path": "test-prompts.json",
+      "sha256": "687874e995d376f7952927375ad97f4d6934a034a97139975153e985a33b7896"
+    }
+  ]
+}

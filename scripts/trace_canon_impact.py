@@ -13,15 +13,15 @@ TEXT_SUFFIXES = {".md", ".json", ".txt"}
 
 
 def category(relative: str) -> str:
-    if relative.startswith("01-canon/"):
+    if relative.startswith("正典/"):
         return "Canon"
-    if relative.startswith("02-planning/"):
+    if relative.startswith("规划/"):
         return "规划"
-    if relative.startswith("03-outlines/"):
+    if relative.startswith("细纲/"):
         return "细纲"
-    if relative.startswith("04-manuscript/"):
+    if relative.startswith("正文/"):
         return "正文"
-    if relative.startswith("05-reviews/"):
+    if relative.startswith("审校/"):
         return "审校"
     return "项目资料"
 
@@ -70,7 +70,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Trace impact before changing Canon facts.")
     parser.add_argument("--project-dir", type=Path, required=True)
     parser.add_argument("--id", dest="ids", action="append", required=True, help="Canon ID; repeatable.")
-    parser.add_argument("--output", type=Path, help="Default: 05-reviews/impact-<first-id>.md")
+    parser.add_argument("--output", type=Path, help="Default: 审校/影响-<首个ID>.md")
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
@@ -79,7 +79,7 @@ def main() -> None:
         parser.error(f"project directory not found: {project}")
     results = {changed_id: scan(project, changed_id) for changed_id in args.ids}
     safe_name = args.ids[0].replace("/", "-").replace("\\", "-")
-    output = args.output or project / "05-reviews" / f"impact-{safe_name}.md"
+    output = args.output or project / "审校" / f"影响-{safe_name}.md"
     if output.exists() and not args.force:
         parser.error(f"output exists: {output}; use --force to replace it")
     output.parent.mkdir(parents=True, exist_ok=True)

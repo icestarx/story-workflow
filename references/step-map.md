@@ -17,8 +17,8 @@
 | 9 | 世界观框架 / frameworks.md |
 | 10 | 悬念系统架构 / frameworks.md |
 | 11 | 核心设定总表 / core-settings.md |
-| 12 | 伏笔、时间线、角色状态、上下文追踪模板 / 01-canon |
-| 13 | 全书大纲与卷纲模板 / 02-planning |
+| 12 | 伏笔、时间线、角色状态、上下文追踪模板 / 正典 |
+| 13 | 全书大纲与卷纲模板 / 规划 |
 | 14 | 全局框架一致性清单 / global-framework-checklist.md |
 | 15 | 初始化确认 / validate_global_framework.py + approvals |
 

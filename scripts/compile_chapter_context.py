@@ -8,6 +8,8 @@ import json
 import re
 from pathlib import Path
 
+from project_paths import chapter_filename, context_filename, review_filename
+
 
 CANON_ID_RE = re.compile(r"\[\[([A-Za-z][A-Za-z0-9_.-]*)\]\]")
 
@@ -29,7 +31,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Compile the minimum context needed to draft one chapter.")
     parser.add_argument("--project-dir", type=Path, required=True)
     parser.add_argument("--chapter", type=int, required=True)
-    parser.add_argument("--output", type=Path, help="Output packet; default is 03-outlines/context/chapter-NNNN-context.md")
+    parser.add_argument("--output", type=Path, help="Output packet; default is 细纲/上下文/第…章-上下文.md")
     parser.add_argument("--purpose", choices=("draft", "revise", "audit"), default="draft")
     parser.add_argument("--previous-chapters", type=int, default=2, help="Number of previous chapter endings to include; default: 2.")
     parser.add_argument("--include-id", action="append", default=[], help="Additional Canon ID to include; repeatable.")
@@ -45,42 +47,42 @@ def main() -> None:
     if args.previous_chapters < 0:
         parser.error("--previous-chapters must be non-negative")
     project = args.project_dir
-    outline = project / "03-outlines" / f"chapter-{args.chapter:04d}.md"
+    outline = project / "细纲" / chapter_filename(args.chapter)
     if not outline.is_file():
         parser.error(f"locked outline not found: {outline}")
 
-    output = args.output or project / "03-outlines/context" / f"chapter-{args.chapter:04d}-context.md"
+    output = args.output or project / "细纲/上下文" / context_filename(args.chapter)
     if output.exists() and not args.force:
         parser.error(f"output exists: {output}; use --force to replace it")
 
     sources: list[tuple[str, Path, bool]] = []
     base_sources = (
-        ("项目简报", project / "00-project/brief.md", False),
-        ("风格卡", project / "00-project/style-card.md", False),
+        ("项目简报", project / "项目/项目简报.md", False),
+        ("风格卡", project / "项目/风格卡.md", False),
         ("锁定细纲", outline, False),
-        ("当前状态", project / "01-canon/state.md", True),
-        ("全局上下文追踪", project / "01-canon/context.md", True),
-        ("时间线（末段）", project / "01-canon/timeline.md", True),
-        ("活跃伏笔", project / "01-canon/foreshadow-ledger.md", True),
-        ("世界硬规则", project / "01-canon/world.md", False),
-        ("力量限制", project / "01-canon/power-system.md", False),
-        ("章节索引", project / "02-planning/chapter-index.md", True),
+        ("当前状态", project / "正典/故事状态.md", True),
+        ("全局上下文追踪", project / "正典/全局上下文.md", True),
+        ("时间线（末段）", project / "正典/时间线.md", True),
+        ("活跃伏笔", project / "正典/伏笔台账.md", True),
+        ("世界硬规则", project / "正典/世界观.md", False),
+        ("力量限制", project / "正典/力量体系.md", False),
+        ("章节索引", project / "规划/章节索引.md", True),
     )
     sources.extend((label, path, tail) for label, path, tail in base_sources if path.is_file())
     for prior_chapter in range(max(1, args.chapter - args.previous_chapters), args.chapter):
-        previous = project / "04-manuscript" / f"chapter-{prior_chapter:04d}.md"
+        previous = project / "正文" / chapter_filename(prior_chapter)
         if previous.is_file():
             sources.append((f"第 {prior_chapter} 章正文末段", previous, True))
     if args.purpose in {"revise", "audit"}:
-        manuscript = project / "04-manuscript" / f"chapter-{args.chapter:04d}.md"
-        review = project / "05-reviews" / f"chapter-{args.chapter:04d}-edit.md"
+        manuscript = project / "正文" / chapter_filename(args.chapter)
+        review = project / "审校" / review_filename(args.chapter)
         if manuscript.is_file():
             sources.append(("目标章正文", manuscript, False))
         if review.is_file():
             sources.append(("目标章既有审校", review, False))
 
     warnings: list[str] = []
-    registry_path = project / "01-canon/registry.json"
+    registry_path = project / "正典/正典索引.json"
     referenced_ids = sorted(set(CANON_ID_RE.findall(outline.read_text(encoding="utf-8"))).union(args.include_id))
     resolved_paths: set[Path] = {path for _, path, _ in sources}
     if referenced_ids and registry_path.is_file():

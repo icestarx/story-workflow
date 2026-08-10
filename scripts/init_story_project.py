@@ -8,18 +8,20 @@ import json
 import textwrap
 from pathlib import Path
 
+from project_paths import chinese_number
+
 
 DIRECTORIES = (
-    "00-project",
-    "01-canon/factions",
-    "01-canon/characters",
-    "02-planning/volumes",
-    "03-outlines/context",
-    "04-manuscript",
-    "05-reviews",
-    "05-reviews/final",
-    "06-research",
-    "07-release",
+    "项目",
+    "正典/势力",
+    "正典/人物",
+    "规划/分卷",
+    "细纲/上下文",
+    "正文",
+    "审校",
+    "审校/最终",
+    "调研",
+    "发布",
 )
 
 
@@ -29,7 +31,7 @@ def clean(value: str) -> str:
 
 def markdown_templates(title: str, genre: str, target_words: str) -> dict[str, str]:
     return {
-        "00-project/brief.md": f"""
+        "项目/项目简报.md": f"""
             # 项目简报
 
             - 暂定书名：{title}
@@ -49,7 +51,7 @@ def markdown_templates(title: str, genre: str, target_words: str) -> dict[str, s
 
             ## 候选与待确认事项
         """,
-        "00-project/reader-profile.md": """
+        "项目/读者画像.md": """
             # 读者画像与承诺
 
             ## 目标读者
@@ -60,7 +62,7 @@ def markdown_templates(title: str, genre: str, target_words: str) -> dict[str, s
 
             ## 不应承诺的内容
         """,
-        "00-project/genre-positioning.md": """
+        "项目/题材定位.md": """
             # 题材定位
 
             ## 用户输入分析
@@ -85,7 +87,7 @@ def markdown_templates(title: str, genre: str, target_words: str) -> dict[str, s
 
             ## 确认状态
         """,
-        "00-project/frameworks.md": """
+        "项目/阶段零框架.md": """
             # 阶段 0 候选框架
 
             ## 角色关系图谱框架
@@ -102,7 +104,7 @@ def markdown_templates(title: str, genre: str, target_words: str) -> dict[str, s
 
             > 所有内容先标注候选 / 已确认 / TBD；冻结 Canon 前须经专项设计与 Canon 管理。
         """,
-        "00-project/global-framework-checklist.md": """
+        "项目/全局框架检查清单.md": """
             # 全局框架一致性检查清单
 
             | 检查项 | 状态（通过 / 候选 / TBD / 不适用） | 证据或冲突 | 责任步骤 |
@@ -114,13 +116,13 @@ def markdown_templates(title: str, genre: str, target_words: str) -> dict[str, s
             | 伏笔窗口与卷纲一致 | TBD | | 79–108 |
             | 章节覆盖与状态可追踪 | TBD | | 109–118 |
         """,
-        "00-project/approvals.md": """
+        "项目/决策批准记录.md": """
             # 决策与批准记录
 
             | 日期 | 决策 | 状态 | 批准者 | 影响范围 | 备注 |
             |---|---|---|---|---|---|
         """,
-        "00-project/style-card.md": """
+        "项目/风格卡.md": """
             # 风格卡
 
             - 叙事视角：
@@ -132,21 +134,21 @@ def markdown_templates(title: str, genre: str, target_words: str) -> dict[str, s
             - 避免事项：
             - 样例只用于抽象特征，不用于直接模仿：
         """,
-        "00-project/banned-terms.txt": """
+        "项目/禁用词.txt": """
             # 仅填写作者或平台明确要求避免的词/短语；# 开头为注释。
             # 格式：词或短语 [TAB] 严重级别（可选）
         """,
-        "00-project/style-patterns.txt": """
+        "项目/风格模式.txt": """
             # 可选：填写需要审计的重复句首、套话或表达模式；# 开头为注释。
             # 每行一个纯文本模式，脚本只报告命中，不自动改写。
         """,
-        "01-canon/core-settings.md": """
+        "正典/核心设定总表.md": """
             # 核心设定总表
 
             | ID | 类别 | 已确认事实 / 候选 | 来源步骤 | 影响范围 | 状态 |
             |---|---|---|---|---|---|
         """,
-        "01-canon/context.md": """
+        "正典/全局上下文.md": """
             # 全局上下文追踪
 
             ## 当前创作位置
@@ -159,7 +161,7 @@ def markdown_templates(title: str, genre: str, target_words: str) -> dict[str, s
 
             ## 硬约束与待确认项
         """,
-        "01-canon/world.md": """
+        "正典/世界观.md": """
             # 世界观 Canon
 
             ## 已确认事实
@@ -170,7 +172,7 @@ def markdown_templates(title: str, genre: str, target_words: str) -> dict[str, s
 
             ## 公开、受限与作者秘密
         """,
-        "01-canon/power-system.md": """
+        "正典/力量体系.md": """
             # 力量体系 Canon
 
             ## 已确认等级、能力与资源
@@ -179,7 +181,7 @@ def markdown_templates(title: str, genre: str, target_words: str) -> dict[str, s
 
             ## 候选 / 待确认
         """,
-        "01-canon/mysteries.md": """
+        "正典/谜案悬念.md": """
             # 谜案与悬念 Canon
 
             ## 已确认谜案
@@ -190,13 +192,13 @@ def markdown_templates(title: str, genre: str, target_words: str) -> dict[str, s
 
             ## 候选 / 待确认
         """,
-        "01-canon/relationships.md": """
+        "正典/关系网络.md": """
             # 关系网络 Canon
 
             | 关系 ID | 双方 | 公开关系 | 实际冲突/依赖 | 知识差 | 变化条件 | 状态 |
             |---|---|---|---|---|---|---|
         """,
-        "01-canon/characters/protagonist.md": """
+        "正典/人物/主角.md": """
             # 主角设定（候选）
 
             ## 基本信息
@@ -211,7 +213,7 @@ def markdown_templates(title: str, genre: str, target_words: str) -> dict[str, s
 
             ## 知识边界、关系与状态
         """,
-        "01-canon/reader-experience.md": """
+        "正典/读者体验.md": """
             # 读者体验 Canon
 
             ## 核心体验句
@@ -224,7 +226,7 @@ def markdown_templates(title: str, genre: str, target_words: str) -> dict[str, s
 
             ## 首卷验证问题
         """,
-        "01-canon/state.md": """
+        "正典/故事状态.md": """
             # 当前故事状态
 
             ## 当前快照
@@ -241,19 +243,19 @@ def markdown_templates(title: str, genre: str, target_words: str) -> dict[str, s
             | 章节 | 变更 | 原因 | Canon ID |
             |---|---|---|---|
         """,
-        "01-canon/timeline.md": """
+        "正典/时间线.md": """
             # 时间线
 
             | 章节 | 时间 | 地点 | 事件 | 参与者 | 信息/状态影响 |
             |---|---|---|---|---|---|
         """,
-        "01-canon/foreshadow-ledger.md": """
+        "正典/伏笔台账.md": """
             # 伏笔台账
 
             | ID | 首次出现 | 当前状态 | 推进记录 | 计划回收窗口 | 责任章节 | 备注 |
             |---|---|---|---|---|---|---|
         """,
-        "02-planning/series-map.md": """
+        "规划/全书总纲.md": """
             # 全书总纲
 
             ## 终局问题与全书承诺
@@ -263,7 +265,7 @@ def markdown_templates(title: str, genre: str, target_words: str) -> dict[str, s
             | 卷 | 章节范围 | 读者承诺 | 入卷状态 | 主线推进 | 卷末兑现 | 出卷新债 |
             |---|---|---|---|---|---|---|
         """,
-        "02-planning/long-arcs.md": """
+        "规划/长线系统.md": """
             # 全书长线系统
 
             ## 情绪弧线
@@ -277,7 +279,7 @@ def markdown_templates(title: str, genre: str, target_words: str) -> dict[str, s
             | ID | 类型 | 起点 | 推进节点 | 兑现窗口 | 代价/风险 | 责任章节 | 状态 |
             |---|---|---|---|---|---|---|---|
         """,
-        "02-planning/chapter-index.md": """
+        "规划/章节索引.md": """
             # 章节索引
 
             | 章 | 卷 | 标题 | 章节功能 | 细纲状态 | 正文状态 | Canon 版本 | 备注 |
@@ -422,16 +424,16 @@ def main() -> None:
     for relative, content in markdown_templates(args.title, args.genre, args.target_words).items():
         path = project_dir / relative
         actions[str(path)] = create_file(path, content, args.dry_run)
-    registry_path = project_dir / "01-canon/registry.json"
+    registry_path = project_dir / "正典/正典索引.json"
     actions[str(registry_path)] = create_file(registry_path, registry_template(), args.dry_run)
-    config_path = project_dir / "00-project/workflow-config.json"
+    config_path = project_dir / "项目/工作流配置.json"
     actions[str(config_path)] = create_file(
         config_path, workflow_config_template(args.planned_chapters, args.planned_volumes), args.dry_run
     )
-    state_path = project_dir / "00-project/production-state.json"
+    state_path = project_dir / "项目/生产状态.json"
     actions[str(state_path)] = create_file(state_path, production_state_template(), args.dry_run)
     for volume in range(1, args.planned_volumes + 1):
-        volume_path = project_dir / "02-planning/volumes" / f"volume-{volume:02d}.md"
+        volume_path = project_dir / "规划/分卷" / f"第{chinese_number(volume)}卷.md"
         actions[str(volume_path)] = create_file(volume_path, volume_template(volume), args.dry_run)
 
     print(json.dumps({"project_dir": str(project_dir.resolve()), "dry_run": args.dry_run, "actions": actions}, ensure_ascii=False, indent=2))

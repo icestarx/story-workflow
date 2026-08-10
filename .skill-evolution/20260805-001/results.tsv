@@ -1,0 +1,5 @@
+timestamp	round	status	hypothesis	vote	mode
+2026-08-05T15:59:28.302196+00:00	0	baseline	用户明确委托在实作与审校后提升 story-workflow；冻结根目录 test-prompts.json，未因候选改动测试。	baseline recorded	generated-unconfirmed
+2026-08-05T16:02:04.111340+00:00	1	kept	在根工作流中加入 PowerShell 子进程 UTF-8 运行约定，将提升诊断、回归与批次恢复命令的可执行性，而不改变 Canon 与停止边界。	2-0 better, 1 tie	paired
+2026-08-05T16:15:16.124994+00:00	2	restored	在根工作流中加入中文项目命名与受控迁移契约，会使中文文件名项目在迁移后保持可诊断、可验证、可续写。	0-0 better, 3 tie	paired
+2026-08-05T16:16:45.347559+00:00	3	kept	在总控的运行卡后加入三类高频请求的最小输入卡，会使立项、Canon 改设和 S1 批次恢复的前置、停点与恢复命令更直接可执行。	3-0 better	paired

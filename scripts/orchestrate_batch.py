@@ -10,11 +10,13 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from project_paths import chinese_number
+
 
 ACTION_CARDS = {
     "rebase-outline": {
         "skill": "chapter-outline",
-        "write_targets": ["03-outlines/chapter-NNNN.md"],
+        "write_targets": ["细纲/第NNNN章.md"],
         "verify": "batch_controller.py mark --stage outline-locked",
         "instruction": "读取最新 Canon，重基目标章细纲；解决冲突后标记锁定。",
     },
@@ -26,43 +28,43 @@ ACTION_CARDS = {
     },
     "draft": {
         "skill": "chapter-drafting",
-        "write_targets": ["04-manuscript/chapter-NNNN.md", "03-outlines/context/chapter-NNNN-context.md"],
+        "write_targets": ["正文/第NNNN章.md", "细纲/上下文/第NNNN章-上下文.md"],
         "verify": "batch_controller.py mark --stage drafted",
         "instruction": "编译最小上下文后起草正文；只执行锁定细纲承诺，不自行冻结新事实。",
     },
     "review": {
         "skill": "chapter-editing",
-        "write_targets": ["05-reviews/chapter-NNNN-edit.md"],
+        "write_targets": ["审校/第NNNN章-编辑审校.md"],
         "verify": "batch_controller.py mark --stage review-passed",
         "instruction": "执行 Canon、因果、体验、语言四层审校；报告必须给出机器可读锁定结论。",
     },
     "canon-commit": {
         "skill": "canon-management",
-        "write_targets": ["01-canon/*.md", "01-canon/registry.json", "02-planning/chapter-index.md"],
+        "write_targets": ["正典/*.md", "正典/正典索引.json", "规划/章节索引.md"],
         "verify": "batch_controller.py mark --stage canon-committed --canon-version VERSION",
         "instruction": "只提交授权范围内、锁定细纲已表达的常规状态变化；否则 halt 并生成待决策包。",
     },
     "lock": {
         "skill": "canon-management",
-        "write_targets": ["02-planning/chapter-index.md"],
+        "write_targets": ["规划/章节索引.md"],
         "verify": "batch_controller.py mark --stage locked",
         "instruction": "核对审校、Canon 提交和章节索引后锁定章节。",
     },
     "batch-complete": {
         "skill": "serial-review",
-        "write_targets": ["05-reviews/period-<range>.md"],
+        "write_targets": ["审校/批次复盘-<范围>.md"],
         "verify": "diagnose_project.py --intent continue",
         "instruction": "对已完成范围复盘承诺、节奏、伏笔、状态与下一批次风险。",
     },
     "halted": {
         "skill": "project-diagnosis",
-        "write_targets": ["05-reviews/"],
+        "write_targets": ["审校/"],
         "verify": "batch_controller.py resume",
         "instruction": "阅读停止原因，修复前置或请求作者决策；不得跳过状态。",
     },
     "halt": {
         "skill": "project-diagnosis",
-        "write_targets": ["05-reviews/"],
+        "write_targets": ["审校/"],
         "verify": "batch_controller.py resume",
         "instruction": "记录阻断原因、影响范围和恢复前提。",
     },
@@ -84,7 +86,7 @@ def controller_next(project: Path) -> dict[str, Any]:
 def replace_tokens(value: Any, chapter: int | None, canon_version: str | None) -> Any:
     if isinstance(value, str):
         if chapter:
-            value = value.replace("NNNN", f"{chapter:04d}")
+            value = value.replace("NNNN", chinese_number(chapter))
         return value.replace("VERSION", canon_version or "<current-version>")
     if isinstance(value, list):
         return [replace_tokens(item, chapter, canon_version) for item in value]

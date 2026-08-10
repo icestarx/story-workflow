@@ -6,10 +6,10 @@ registry.json 是 Canon 的检索索引，不是完整小说数据库。字段�
       "schema_version": 1,
       "canon_version": "0.1.0",
       "entities": [
-        {"id": "char.hero", "type": "character", "name": "主角", "status": "confirmed", "source_file": "01-canon/characters/hero.md"}
+        {"id": "char.hero", "type": "character", "name": "主角", "status": "confirmed", "source_file": "正典/人物/hero.md"}
       ],
       "facts": [
-        {"id": "world.cost", "statement": "使用术式会消耗寿元", "status": "confirmed", "source_steps": [34], "visibility": "public", "source_file": "01-canon/world.md"}
+        {"id": "world.cost", "statement": "使用术式会消耗寿元", "status": "confirmed", "source_steps": [34], "visibility": "public", "source_file": "正典/世界观.md"}
       ],
       "foreshadows": [
         {"id": "foreshadow.seal", "setup_chapter": 3, "status": "open", "target_window": "45-60", "responsible_chapter": 52}

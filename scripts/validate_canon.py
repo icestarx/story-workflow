@@ -13,14 +13,14 @@ REQUIRED_COLLECTIONS = ("entities", "facts", "foreshadows", "changes")
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Validate 01-canon/registry.json.")
+    parser = argparse.ArgumentParser(description="Validate 正典/正典索引.json.")
     parser.add_argument("--project-dir", type=Path, required=True)
     parser.add_argument("--strict", action="store_true", help="Treat warnings as errors.")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
     project = args.project_dir
-    path = project / "01-canon/registry.json"
+    path = project / "正典/正典索引.json"
     errors: list[str] = []
     warnings: list[str] = []
     try:

@@ -1,0 +1,109 @@
+{
+  "run_id": "20260806-002",
+  "created_at": "2026-08-06T06:21:26.410985+00:00",
+  "target_root": "C:\\Users\\i-lik\\Documents\\小说",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "96ab1495b2e710004298eabcebc227e50e4ad7d1c311cf5d6ccd69d834ccbfbb"
+    },
+    {
+      "path": "sub-skills\\canon-management\\SKILL.md",
+      "sha256": "193463ea376cdaa1b7d1ee03c5d2670b072fbb1f650fc23482772883ba2551ca"
+    },
+    {
+      "path": "sub-skills\\chapter-drafting\\SKILL.md",
+      "sha256": "4fec73803a294da83cd843de7776381b75f4d1856d2a79d315f286caaccd2b00"
+    },
+    {
+      "path": "sub-skills\\chapter-editing\\SKILL.md",
+      "sha256": "68100161df4149563c142612f4e36ab8854123c33d961a431224f4eac221ce52"
+    },
+    {
+      "path": "sub-skills\\chapter-outline\\SKILL.md",
+      "sha256": "984904ff7dccaf40965b41dc50072d293aa8136880d2266198d9df1bc623cd75"
+    },
+    {
+      "path": "sub-skills\\character-arc-design\\SKILL.md",
+      "sha256": "aea270b2ad6e938ed5aa9d34dd5e44d4e0976128bdbf118cc3ed8636c06d9acb"
+    },
+    {
+      "path": "sub-skills\\faction-design\\SKILL.md",
+      "sha256": "b078eb4e26741d57d1f1477ffd72e4ae52d340f976815ab222bf5b826533796b"
+    },
+    {
+      "path": "sub-skills\\global-review\\SKILL.md",
+      "sha256": "9e2682f49aedd04e2e8f925dae989f29821518ce561c89ce1f0519ad27997f91"
+    },
+    {
+      "path": "sub-skills\\long-arc-planning\\SKILL.md",
+      "sha256": "bca22a55d08d788839b55797e1f5073746ba22bd5fa06399157392b4c6d6e84c"
+    },
+    {
+      "path": "sub-skills\\manuscript-quality-audit\\SKILL.md",
+      "sha256": "6c2042936f51c55af5ee26c3e5c699697c8612e96398fef854d1153bec80bef3"
+    },
+    {
+      "path": "sub-skills\\mystery-design\\SKILL.md",
+      "sha256": "9878ac7e44f9f5c6d997e833f99208253b638197ca278fef8915e417f8d54d89"
+    },
+    {
+      "path": "sub-skills\\power-system-design\\SKILL.md",
+      "sha256": "04cdfaab1d1ba73029c38c3b2eb6c79507cfff572e1e22329a13dfcb315392cc"
+    },
+    {
+      "path": "sub-skills\\project-bootstrap\\SKILL.md",
+      "sha256": "00a51fd78450fc33d5a394e5257b747a6a6ef7b3c90f09a1360f7d3c5fbf665c"
+    },
+    {
+      "path": "sub-skills\\project-delivery\\SKILL.md",
+      "sha256": "d27b1c6a3fe2e13b1766287c335fdf71b50453fc0204e4e2a3cb09411029c941"
+    },
+    {
+      "path": "sub-skills\\project-diagnosis\\SKILL.md",
+      "sha256": "067fa01ac91182d8d47c89bde7f62e166bae915eac175bcb6782a8f6878c6aaa"
+    },
+    {
+      "path": "sub-skills\\publication-packaging\\SKILL.md",
+      "sha256": "485e5bf5251b61b93461a29296b73a527a47d2859530c8a1a8c8bbed778506af"
+    },
+    {
+      "path": "sub-skills\\reader-experience-design\\SKILL.md",
+      "sha256": "e2072bee232ef06fd65c2e80058da7a814ffc21005c619206e707dedca852fcd"
+    },
+    {
+      "path": "sub-skills\\serial-production\\SKILL.md",
+      "sha256": "f4db976911ecf0d21dee240729ec17025ea78deb949583c7954f0b3608a9942f"
+    },
+    {
+      "path": "sub-skills\\serial-review\\SKILL.md",
+      "sha256": "58abdd09723b957fe887f6b087ed28895a0044645dd3a802625e301378d63e9c"
+    },
+    {
+      "path": "sub-skills\\series-architecture\\SKILL.md",
+      "sha256": "ab733a9fcd654b6d340cacaf8381a3cfec36d75fd4e065c577c015ddaa0cb1bf"
+    },
+    {
+      "path": "sub-skills\\story-positioning\\SKILL.md",
+      "sha256": "164a872dbb50dcf96abed6cd7ad97e4f77708b55a0194f74cd28a5bdba21d288"
+    },
+    {
+      "path": "sub-skills\\story-research\\SKILL.md",
+      "sha256": "584c641db3737b322560dfe0157698ca8ca04806165e0387b1bcf875c285db49"
+    },
+    {
+      "path": "sub-skills\\volume-planning\\SKILL.md",
+      "sha256": "1f6cd4f2e54812b19844045c70685102dfd0597f0407dcb7fa5e5d9a95bd411c"
+    },
+    {
+      "path": "sub-skills\\world-design\\SKILL.md",
+      "sha256": "9855f1c48a8c96c9f0c72817af8f740aa3cf6411136df9ebca2dfbbdb80ac2d5"
+    }
+  ],
+  "test_prompts": [
+    {
+      "path": "test-prompts.json",
+      "sha256": "4e2bd5197f8c412e02cc5b10eb73b9db97ccfcee5998db15a3d988ef6faccce1"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "planning": {
+    "planned_chapters": 250,
+    "planned_volumes": 5,
+    "supporting_cast_target": 7,
+    "faction_targets": {
+      "order": 3,
+      "neutral": 2,
+      "antagonistic": 2
+    },
+    "foreshadow_targets": {
+      "long": {
+        "min": 30,
+        "max": 50,
+        "when_chapters_at_least": 300
+      },
+      "medium": {
+        "min": 12,
+        "max": 30
+      },
+      "short": {
+        "min": 8,
+        "max": 25
+      }
+    }
+  },
+  "automation": {
+    "default_mode": "guarded",
+    "max_contiguous_batch": 100,
+    "require_locked_outline": true,
+    "require_canon_match": true,
+    "require_review_gate": true,
+    "halt_on": [
+      "s1_open",
+      "unapproved_canon_delta",
+      "major_creative_decision",
+      "context_gap",
+      "canon_version_mismatch"
+    ]
+  }
+}

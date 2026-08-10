@@ -9,6 +9,8 @@ import re
 import sys
 from pathlib import Path
 
+from project_paths import chapter_filename, chapter_from_filename
+
 
 REQUIRED_HEADINGS = (
     "章节信息",
@@ -25,7 +27,6 @@ REQUIRED_HEADINGS = (
     "Canon 冲突检查",
 )
 HEADING_RE = re.compile(r"^##\s+(.+?)\s*$", re.MULTILINE)
-CHAPTER_RE = re.compile(r"chapter-(\d{4})\.md$", re.IGNORECASE)
 
 
 def validate_file(path: Path) -> dict[str, object]:
@@ -48,12 +49,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Validate story-workflow chapter outline contracts.")
     target = parser.add_mutually_exclusive_group(required=True)
     target.add_argument("--outline", type=Path, help="One chapter outline Markdown file.")
-    target.add_argument("--outline-dir", type=Path, help="Directory containing chapter-NNNN.md outlines.")
+    target.add_argument("--outline-dir", type=Path, help="Directory containing 第…章.md outlines.")
     parser.add_argument("--expected-chapters", type=int, help="Check coverage from chapter 0001 through this number.")
     parser.add_argument("--json", action="store_true", help="Print JSON instead of human-readable output.")
     args = parser.parse_args()
 
-    paths = [args.outline] if args.outline else sorted(args.outline_dir.glob("chapter-*.md"))
+    paths = [args.outline] if args.outline else sorted(args.outline_dir.glob("第*章.md"))
     errors: list[str] = []
     reports: list[dict[str, object]] = []
     for path in paths:
@@ -66,8 +67,8 @@ def main() -> None:
     if args.expected_chapters is not None:
         if args.expected_chapters <= 0:
             parser.error("--expected-chapters must be positive")
-        discovered = {int(match.group(1)) for path in paths if (match := CHAPTER_RE.search(path.name))}
-        coverage_missing = [f"chapter-{number:04d}.md" for number in range(1, args.expected_chapters + 1) if number not in discovered]
+        discovered = {number for path in paths if (number := chapter_from_filename(path.name)) is not None}
+        coverage_missing = [chapter_filename(number) for number in range(1, args.expected_chapters + 1) if number not in discovered]
         if coverage_missing:
             errors.append("missing expected chapter files")
 

@@ -12,6 +12,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from project_paths import chapter_filename, review_filename
 from validate_outline import validate_file
 
 
@@ -33,7 +34,7 @@ def load_json(path: Path) -> dict[str, Any]:
 
 
 def state_path(project: Path) -> Path:
-    return project / "00-project/production-state.json"
+    return project / "项目/生产状态.json"
 
 
 def load_state(project: Path) -> dict[str, Any]:
@@ -52,7 +53,7 @@ def save_state(project: Path, state: dict[str, Any]) -> None:
 
 
 def canon_version(project: Path) -> str:
-    registry = load_json(project / "01-canon/registry.json")
+    registry = load_json(project / "正典/正典索引.json")
     version = registry.get("canon_version")
     if not isinstance(version, str) or not version:
         raise ValueError("registry.json has no canon_version")
@@ -60,7 +61,7 @@ def canon_version(project: Path) -> str:
 
 
 def config(project: Path) -> dict[str, Any]:
-    path = project / "00-project/workflow-config.json"
+    path = project / "项目/工作流配置.json"
     if not path.is_file():
         raise ValueError("workflow-config.json not found")
     value = load_json(path)
@@ -70,15 +71,15 @@ def config(project: Path) -> dict[str, Any]:
 
 
 def outline_path(project: Path, chapter: int) -> Path:
-    return project / "03-outlines" / f"chapter-{chapter:04d}.md"
+    return project / "细纲" / chapter_filename(chapter)
 
 
 def manuscript_path(project: Path, chapter: int) -> Path:
-    return project / "04-manuscript" / f"chapter-{chapter:04d}.md"
+    return project / "正文" / chapter_filename(chapter)
 
 
 def review_path(project: Path, chapter: int) -> Path:
-    return project / "05-reviews" / f"chapter-{chapter:04d}-edit.md"
+    return project / "审校" / review_filename(chapter)
 
 
 def outline_lock_status(project: Path, chapter: int, expected_version: str) -> tuple[bool, str]:

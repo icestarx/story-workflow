@@ -1,0 +1,4 @@
+interface:
+  display_name: "技能进化"
+  short_description: "Validate and improve a skill in three rounds"
+  default_prompt: "Use $skill-evolution to run a guarded three-round upgrade of this skill."

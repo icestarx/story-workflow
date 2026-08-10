@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "canon_version": "1.0.20",
+  "entities": [
+    {"id":"char.lu_chenshou","type":"character","name":"陆沉舟","status":"confirmed","source_file":"正典/人物/主角.md"},
+    {"id":"char.gu_qingwu","type":"character","name":"顾青梧","status":"confirmed","source_file":"正典/人物/顾青梧.md"},
+    {"id":"char.pei_zhaoye","type":"character","name":"裴照夜","status":"confirmed","source_file":"正典/人物/裴照夜.md"},
+    {"id":"char.ning_wang","type":"character","name":"宁妄","status":"confirmed","source_file":"正典/人物/宁妄.md"},
+    {"id":"char.luo_chunshan","type":"character","name":"骆春山","status":"confirmed","source_file":"正典/人物/骆春山.md"},
+    {"id":"char.zhu_li","type":"character","name":"祝离","status":"confirmed","source_file":"正典/人物/祝离.md"},
+    {"id":"char.yue_guanche","type":"character","name":"越观尘","status":"confirmed","source_file":"正典/人物/越观尘.md"},
+    {"id":"char.qi_tingxue","type":"character","name":"祁听雪","status":"confirmed","source_file":"正典/人物/祁听雪.md"},
+    {"id":"char.wen_xuance","type":"character","name":"闻玄策","status":"confirmed","source_file":"正典/人物/闻玄策.md"},
+    {"id":"faction.tianheng_court","type":"faction","name":"天衡道庭","status":"confirmed","source_file":"正典/势力/天衡道庭.md"},
+    {"id":"faction.qingming_sword","type":"faction","name":"青冥剑院","status":"confirmed","source_file":"正典/势力/青冥剑院.md"},
+    {"id":"faction.suspended_lamp","type":"faction","name":"悬灯寺","status":"confirmed","source_file":"正典/势力/悬灯寺.md"},
+    {"id":"faction.tidewatch_tower","type":"faction","name":"观潮楼","status":"confirmed","source_file":"正典/势力/观潮楼.md"},
+    {"id":"faction.hundred_trades","type":"faction","name":"百业盟","status":"confirmed","source_file":"正典/势力/百业盟.md"},
+    {"id":"faction.heaven_archive","type":"faction","name":"书天监","status":"confirmed","source_file":"正典/势力/书天监.md"},
+    {"id":"faction.nameless_society","type":"faction","name":"无名会","status":"confirmed","source_file":"正典/势力/无名会.md"}
+  ],
+  "facts": [
+    {"id":"world.tianji","statement":"天籍以名字分配灵潮、保护与劫役征调。","status":"confirmed","source_steps":[31,32,33,34],"visibility":"public","source_file":"正典/世界观.md"},
+    {"id":"world.outer_ledger","statement":"被除名的外账者失去公开权利，且会在大劫时被无主化收走命火。","status":"confirmed","source_steps":[31,32,33,34],"visibility":"character-limited","source_file":"正典/世界观.md"},
+    {"id":"world.mingxu","statement":"冥墟封印依赖自知姓名作锚，秘密夺名会累积万劫。","status":"confirmed","source_steps":[31,33,34],"visibility":"author-only","source_file":"正典/世界观.md"},
+    {"id":"power.zhaogu_book","statement":"照骨书只能照见命债方向和残响，越界使用会抽走持有者的私人记忆。","status":"confirmed","source_steps":[35,36,37],"visibility":"character-limited","source_file":"正典/力量体系.md"},
+    {"id":"power.five_realms","statement":"命火修行分引烛、拔契、立簿、还照、破阙五阶，均有资源、见证与反制要求。","status":"confirmed","source_steps":[35,36,37],"visibility":"public","source_file":"正典/力量体系.md"},
+    {"id":"mystery.yanhui","statement":"雁回泽死籍案是五处祭地之一的强制夺名。","status":"confirmed","source_steps":[46,47,48,49],"visibility":"author-only","source_file":"正典/谜案悬念.md"},
+    {"id":"mystery.haishi","statement":"海市借名把人的身份抵押为灵潮配额。","status":"confirmed","source_steps":[46,47,48,49],"visibility":"author-only","source_file":"正典/谜案悬念.md"},
+    {"id":"mystery.zongmen","statement":"宗门突破空壳案源自书天监挪用匿名命债。","status":"confirmed","source_steps":[46,47,48,49],"visibility":"author-only","source_file":"正典/谜案悬念.md"},
+    {"id":"mystery.wujie","statement":"闻玄策试图以抹除全天下姓名终止征调，但会同时消灭人的历史和选择。","status":"confirmed","source_steps":[46,47,48,49],"visibility":"author-only","source_file":"正典/谜案悬念.md"}
+  ],
+  "foreshadows": [
+    {"id":"foreshadow.ash_name","setup_chapter":1,"status":"advanced","target_window":"231-240","responsible_chapter":236,"source_file":"正典/伏笔台账.md"},
+    {"id":"foreshadow.salt_seal","setup_chapter":3,"status":"advanced","target_window":"41-50","responsible_chapter":47,"source_file":"正典/伏笔台账.md"},
+    {"id":"foreshadow.tide_reverse","setup_chapter":52,"status":"open","target_window":"146-155","responsible_chapter":150,"source_file":"正典/伏笔台账.md"},
+    {"id":"foreshadow.blank_contract","setup_chapter":103,"status":"open","target_window":"201-215","responsible_chapter":208,"source_file":"正典/伏笔台账.md"},
+    {"id":"foreshadow.no_name_price","setup_chapter":168,"status":"open","target_window":"241-250","responsible_chapter":246,"source_file":"正典/伏笔台账.md"}
+  ],
+  "changes": [
+    {"version":"1.0.0","date":"2026-08-05","reason":"用户授权作者自主命题后，提交定位、世界、力量、势力、谜案与角色基础 Canon。","affected_ids":["world.tianji","world.outer_ledger","world.mingxu","power.zhaogu_book","mystery.yanhui","char.lu_chenshou","faction.tianheng_court"],"approved_by":"user-delegated-author"},
+    {"version":"1.0.1","date":"2026-08-05","reason":"第1章锁定后提交已批准的常规状态与伏笔推进。","affected_ids":["foreshadow.ash_name","char.lu_chenshou","mystery.yanhui"],"approved_by":"user-delegated-1-10"},
+    {"version":"1.0.2","date":"2026-08-05","reason":"第2章锁定后提交北堤水路、封铺查验与护人护证据分工等常规状态变化。","affected_ids":["mystery.yanhui","foreshadow.ash_name","char.lu_chenshou","char.zhu_li"],"approved_by":"user-delegated-1-10"},
+    {"version":"1.0.3","date":"2026-08-05","reason":"第3章锁定后提交顾青梧的公开入场、留名油物证与盐砂伏笔前置。","affected_ids":["char.gu_qingwu","mystery.yanhui","foreshadow.ash_name","foreshadow.salt_seal"],"approved_by":"user-delegated-1-10"},
+    {"version":"1.0.4","date":"2026-08-06","reason":"第4章锁定后提交盐路副封、北堤收验期限与小铜灯被扣等常规状态变化。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.gu_qingwu"],"approved_by":"user-delegated-1-10"},
+    {"version":"1.0.5","date":"2026-08-06","reason":"第5章锁定后提交死籍交接、小铜灯改列劫务遗物与北堤复核等待状态。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.zhu_li","char.gu_qingwu"],"approved_by":"user-delegated-1-10"},
+    {"version":"1.0.6","date":"2026-08-06","reason":"第6章锁定后提交拒验条、顾青梧署名留样与小铜灯西四转运状态。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.gu_qingwu"],"approved_by":"user-delegated-1-10"},
+    {"version":"1.0.7","date":"2026-08-06","reason":"第7章锁定后提交西泡子转移、西四位置与劫字号木筹门槛。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.gu_qingwu","char.zhu_li"],"approved_by":"user-delegated-1-10"},
+    {"version":"1.0.8","date":"2026-08-06","reason":"第8章锁定后提交劫乙七木筹实见、篙房书手与盐路检点交接状态。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.gu_qingwu"],"approved_by":"user-delegated-1-10"},
+    {"version":"1.0.9","date":"2026-08-06","reason":"第9章锁定后提交西四外检、洗油房甲转签残片与子时净油期限。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.gu_qingwu"],"approved_by":"user-delegated-1-10"},
+    {"version":"1.0.10","date":"2026-08-06","reason":"第10章锁定后提交签字废油分样、旧转签原始来路与小铜灯净油状态。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.gu_qingwu"],"approved_by":"user-delegated-1-10"},
+    {"version":"1.0.11","date":"2026-08-06","reason":"第11章锁定后提交阿绳安置、死籍时辰比对与北堤灰窑方向。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.gu_qingwu","char.zhu_li"],"approved_by":"user-delegated-11-20"},
+    {"version":"1.0.12","date":"2026-08-06","reason":"第12章锁定后提交废盐船坞转移、无名旧灯耗尽与灰窑车时刻。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.gu_qingwu","char.zhu_li"],"approved_by":"user-delegated-11-20"},
+    {"version":"1.0.13","date":"2026-08-06","reason":"第13章锁定后提交灰窑丙炉交接签与废盐船坞暴露状态。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.gu_qingwu","char.zhu_li"],"approved_by":"user-delegated-11-20"},
+    {"version":"1.0.14","date":"2026-08-06","reason":"第14章锁定后提交灰渠撤离、药草损耗与丙炉排灰观察窗口。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.gu_qingwu","char.zhu_li"],"approved_by":"user-delegated-11-20"},
+    {"version":"1.0.15","date":"2026-08-06","reason":"第15章锁定后提交丙炉炭化回签、乙七编号链与阿绳高热状态。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.gu_qingwu","char.zhu_li"],"approved_by":"user-delegated-11-20"},
+    {"version":"1.0.16","date":"2026-08-06","reason":"第16章锁定后提交旧籍退外账程序词、阿绳伤情暂稳与核盐问询入口。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.gu_qingwu","char.zhu_li"],"approved_by":"user-delegated-11-20"},
+    {"version":"1.0.17","date":"2026-08-06","reason":"第17章锁定后提交盐课拒答条、倒潮堤召牌与公开样物副本记录。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.gu_qingwu"],"approved_by":"user-delegated-11-20"},
+    {"version":"1.0.18","date":"2026-08-06","reason":"第18章锁定后提交后沟子初潮标抄记与巡籍查扣预告。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.gu_qingwu"],"approved_by":"user-delegated-11-20"},
+    {"version":"1.0.19","date":"2026-08-06","reason":"第19章锁定后提交药囊封验、阿绳拒绝被带走与雁回泽问籍复核单。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.gu_qingwu","char.zhu_li"],"approved_by":"user-delegated-11-20"},
+    {"version":"1.0.20","date":"2026-08-06","reason":"第20章锁定后提交雁回泽旧籍七日封档、“未生暂置”边栏异常与活人记录追查期限。","affected_ids":["mystery.yanhui","foreshadow.salt_seal","char.lu_chenshou","char.gu_qingwu","char.zhu_li"],"approved_by":"user-delegated-11-20"}
+  ]
+}

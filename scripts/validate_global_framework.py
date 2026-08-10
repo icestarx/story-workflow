@@ -7,29 +7,31 @@ import argparse
 import json
 from pathlib import Path
 
+from project_paths import chinese_number
+
 
 REQUIRED_FILES = (
-    "00-project/brief.md",
-    "00-project/reader-profile.md",
-    "00-project/genre-positioning.md",
-    "00-project/frameworks.md",
-    "00-project/global-framework-checklist.md",
-    "00-project/workflow-config.json",
-    "00-project/production-state.json",
-    "01-canon/core-settings.md",
-    "01-canon/context.md",
-    "01-canon/world.md",
-    "01-canon/power-system.md",
-    "01-canon/mysteries.md",
-    "01-canon/relationships.md",
-    "01-canon/reader-experience.md",
-    "01-canon/state.md",
-    "01-canon/timeline.md",
-    "01-canon/foreshadow-ledger.md",
-    "01-canon/registry.json",
-    "02-planning/series-map.md",
-    "02-planning/long-arcs.md",
-    "02-planning/chapter-index.md",
+    "项目/项目简报.md",
+    "项目/读者画像.md",
+    "项目/题材定位.md",
+    "项目/阶段零框架.md",
+    "项目/全局框架检查清单.md",
+    "项目/工作流配置.json",
+    "项目/生产状态.json",
+    "正典/核心设定总表.md",
+    "正典/全局上下文.md",
+    "正典/世界观.md",
+    "正典/力量体系.md",
+    "正典/谜案悬念.md",
+    "正典/关系网络.md",
+    "正典/读者体验.md",
+    "正典/故事状态.md",
+    "正典/时间线.md",
+    "正典/伏笔台账.md",
+    "正典/正典索引.json",
+    "规划/全书总纲.md",
+    "规划/长线系统.md",
+    "规划/章节索引.md",
 )
 FRAMEWORK_HEADINGS = (
     "角色关系图谱框架",
@@ -56,7 +58,7 @@ def main() -> None:
         if not (project / relative).is_file():
             errors.append(f"missing required file: {relative}")
 
-    framework_path = project / "00-project/frameworks.md"
+    framework_path = project / "项目/阶段零框架.md"
     if framework_path.is_file():
         text = framework_path.read_text(encoding="utf-8")
         for heading in FRAMEWORK_HEADINGS:
@@ -64,7 +66,7 @@ def main() -> None:
                 errors.append(f"frameworks.md missing heading: {heading}")
 
     config: dict[str, object] = {}
-    config_path = project / "00-project/workflow-config.json"
+    config_path = project / "项目/工作流配置.json"
     if config_path.is_file():
         try:
             config = json.loads(config_path.read_text(encoding="utf-8"))
@@ -85,7 +87,7 @@ def main() -> None:
             volume_count = planning.get("planned_volumes", 0)
             if isinstance(volume_count, int) and volume_count > 0:
                 for volume in range(1, volume_count + 1):
-                    path = project / "02-planning/volumes" / f"volume-{volume:02d}.md"
+                    path = project / "规划/分卷" / f"第{chinese_number(volume)}卷.md"
                     if not path.is_file():
                         errors.append(f"missing planned volume template: {path.relative_to(project)}")
 
